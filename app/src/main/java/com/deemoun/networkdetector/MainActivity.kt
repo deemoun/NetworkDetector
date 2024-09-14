@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import com.deemoun.networkdetector.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        val textView: TextView = findViewById(R.id.textview_first)
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -42,9 +44,10 @@ class MainActivity : AppCompatActivity() {
                         "Ping failed, response code: $responseCode"
                     }
                     // Show the result in a Snackbar
-                    Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .show()
+//                    Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+//                        .setAnchorView(R.id.fab)
+//                        .show()
+                    textView.text = message
                 }
             }
         }
