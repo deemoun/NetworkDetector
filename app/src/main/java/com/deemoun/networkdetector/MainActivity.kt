@@ -1,7 +1,6 @@
 package com.deemoun.networkdetector
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -43,10 +42,6 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         "Ping failed, response code: $responseCode"
                     }
-                    // Show the result in a Snackbar
-//                    Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-//                        .setAnchorView(R.id.fab)
-//                        .show()
                     textView.text = message
                 }
             }
