@@ -35,14 +35,19 @@ class MainActivity : AppCompatActivity() {
             // Launch the ping task in a coroutine
             GlobalScope.launch(Dispatchers.IO) {
                 val util = Util()
-                val responseCode = util.pingUrl("https://www.instagram.com")
+                val result = util.pingUrl("https://www.instagram.com")
+
                 withContext(Dispatchers.Main) {
-                    val message = if (responseCode == 200) {
-                        "Ping successful, response code: $responseCode"
+                    if (result != null) {
+                        val message = if (result.responseCode == 200) {
+                            "Ping successful: URL = ${result.url}, Response code = ${result.responseCode}"
+                        } else {
+                            "Ping failed: URL = ${result.url}, Response code = ${result.responseCode}"
+                        }
+                        textView.text = message
                     } else {
-                        "Ping failed, response code: $responseCode"
+                        textView.text = "Ping failed: Unable to reach the URL"
                     }
-                    textView.text = message
                 }
             }
         }

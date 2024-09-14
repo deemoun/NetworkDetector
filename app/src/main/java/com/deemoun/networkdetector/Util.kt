@@ -4,9 +4,14 @@ import android.util.Log
 import java.net.HttpURLConnection
 import java.net.URL
 
+data class PingResult(
+    val url: URL,
+    val responseCode: Int
+)
+
 class Util {
 
-    fun pingUrl(url: String): Int {
+    fun pingUrl(url: String): PingResult? {
         return try {
             val urlObj = URL(url)
             val connection = urlObj.openConnection() as HttpURLConnection
@@ -18,12 +23,12 @@ class Util {
             val responseCode = connection.responseCode
             Log.d("PingResponse", "Response code: $responseCode")
 
-            // Return the response code, for example 200 means success
-            responseCode
+            // Return a PingResult containing the URL object and response code
+            PingResult(url = urlObj, responseCode = responseCode)
         } catch (e: Exception) {
             e.printStackTrace()
             Log.e("PingError", "Error during ping: ${e.message}")
-            -1 // Return -1 in case of failure
+            null // Return null in case of failure
         }
     }
 }
